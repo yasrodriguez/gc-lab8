@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Calculate the batting average and slugging % for one or more baseball or
+ * Calculates the batting average and slugging % for one or more baseball or
  * softball players.
  * 
  * @author Yasmin
@@ -19,6 +19,7 @@ public class BattingAverageCalculator {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		boolean keepGoing = true;
+
 		System.out.println("Welcome to Batting Average Calculator!");
 		System.out.println();
 
@@ -32,7 +33,6 @@ public class BattingAverageCalculator {
 				System.out.print("Result for at-bat " + i + ": ");
 				atBats[i] = Validator.getInt(scan, "Result for at-bat " + i + ": ", 0, 4);
 			}
-
 			System.out.println();
 
 			System.out.printf("Batting average: %.3f\n", calculateBattingAverage(atBats));
@@ -48,6 +48,8 @@ public class BattingAverageCalculator {
 	 * Calculates the batting average: number of at-bats for which the player earned
 	 * at least one base divided by the total number of at-bats.
 	 * 
+	 * @param atBats
+	 *            bats for a player
 	 * @return batting average
 	 */
 	public static double calculateBattingAverage(int[] atBats) {
@@ -65,6 +67,8 @@ public class BattingAverageCalculator {
 	 * Calculates the slugging percentage: number of bases earned divided by total
 	 * number of at-bats.
 	 * 
+	 * @param atBats
+	 *            bats for a player
 	 * @return slugging percentage
 	 */
 	public static double calculateSlugging(int[] atBats) {
