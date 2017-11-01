@@ -18,29 +18,34 @@ public class BattingAverageCalculator {
 	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		boolean keepGoing = true;
 
 		System.out.println("Welcome to Batting Average Calculator!");
 		System.out.println();
 
-		while (keepGoing) {
-			final int ARRAY_SIZE = Validator.getInt(scan, "Enter number of times at bat: ", 1, Integer.MAX_VALUE);
-			int[] atBats = new int[ARRAY_SIZE];
+		int numOfBatters = Validator.getInt(scan, "Enter number of batters: ", 1, Integer.MAX_VALUE);
+		int[][] batterStats = new int[numOfBatters][];
+
+		for (int i = 0; i < batterStats.length; i++) {
+
+			int atBats = Validator.getInt(scan, "Batter # " + (i + 1) + ", enter number of times at bat: ",
+					1, Integer.MAX_VALUE);
+			batterStats[i] = new int[atBats];
 			System.out.println();
 
 			System.out.println("0=out, 1=single, 2=double, 3=triple, 4=home run");
-			for (int i = 0; i < atBats.length; i++) {
-				System.out.print("Result for at-bat " + i + ": ");
-				atBats[i] = Validator.getInt(scan, "Result for at-bat " + i + ": ", 0, 4);
+			for (int j = 0; j < batterStats[i].length; j++) {
+				batterStats[i][j] = Validator.getInt(scan, "Result for at-bat " + j + ": ", 0, 4);
 			}
 			System.out.println();
-
-			System.out.printf("Batting average: %.3f\n", calculateBattingAverage(atBats));
-			System.out.printf("Slugging Percentage: %.3f\n", calculateSlugging(atBats));
-			System.out.println();
-
-			keepGoing = Executor.wantToContinue("Another batter? (y/n): ", scan);
 		}
+
+		for (int i = 0; i < batterStats.length; i++) {
+			System.out.printf("Batter %d   average: %.3f   slugging percentage: %.3f\n", i + 1,
+					calculateBattingAverage(batterStats[i]), calculateSlugging(batterStats[i]));
+		}
+
+		System.out.println();
+
 		System.out.println("Goodbye!");
 	}
 
